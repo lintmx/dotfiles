@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --randomize --bg-fill /home/lintmx/Pictures/Wallpapers/*.jpg

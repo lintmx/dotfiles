@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto Change Wallpapers.
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/change-wallpaper

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+action_lock="0. Lock System"
+action_shutdown="1. Shutdown"
+action_reboot="2. Reboot"
+action_sleep="3. Sleep"
+action_logout="4. Logout"
+
+arg=$( echo -e "$action_lock\n$action_shutdown\n$action_reboot\n$action_sleep\n$action_logout" | rofi -dmenu -p "Power Manager:" )
+
+if [ "$arg" == "$action_lock" ]; then
+    dm-tool lock
+fi
+
+if [ "$arg" == "$action_shutdown" ]; then
+    systemctl poweroff
+fi
+
+if [ "$arg" == "$action_reboot" ]; then
+    systemctl reboot
+fi
+
+if [ "$arg" == "$action_sleep" ]; then
+    systemctl suspend
+fi
+
+if [ "$arg" == "$action_logout" ]; then
+    i3-msg exit
+fi

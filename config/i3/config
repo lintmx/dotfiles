@@ -1,0 +1,209 @@
+# My i3 config
+#
+# Dependencies:
+#    conky
+#    feh
+#    fcitx
+#    rofi
+#    mpd
+#    mpc
+#    termite
+#    pcmanfm
+#    chromium
+#    numlockx
+#    telegram-desktop
+#    network-manager-applet
+# Font-family:
+#    Noto Sans
+#    Font Awesome
+
+# Set Mod Key
+set $mod Mod4
+
+# Autorun
+exec --no-startup-id xset -b
+exec --no-startup-id numlockx on
+exec --no-startup-id screen-tools auto
+exec --no-startup-id fcitx
+exec --no-startup-id nm-applet
+exec --no-startup-id change_wallpaper
+exec --no-startup-id telegram-desktop
+exec --no-startup-id mpd
+
+# Set Quick Start
+bindsym $mod+e exec --no-startup-id pcmanfm
+bindsym $mod+r exec --no-startup-id termite
+bindsym $mod+c exec --no-startup-id chromium --proxy-pac-url=http://pac.lintmx.xyz/proxy.pac
+bindsym $mod+d exec --no-startup-id rofi -show run -font "Source Code Pro 12"
+
+# Set Hot Key
+floating_modifier $mod
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+a mode "Resize Window"
+bindsym $mod+p focus parent
+bindsym $mod+i focus child
+bindsym $mod+b border toggle
+bindsym $mod+m bar mode toggle
+bindsym $mod+BackSpace exec --no-startup-id power-manager
+bindsym $mod+y split h
+bindsym $mod+u split v
+
+bindsym $mod+Mod1+space floating toggle
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+equal exec --no-startup-id screen-tools auto
+bindsym $mod+Shift+minus exec --no-startup-id screen-tools off eDP1
+
+# Meida control
+bindsym XF86AudioRaiseVolume exec volume-tools volume 2%+
+bindsym XF86AudioLowerVolume exec volume-tools volume 2%-
+bindsym XF86AudioMute exec volume-tools volume 0%
+
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+
+# Monitor control
+bindsym $mod+Ctrl+Mod1+l focus output left
+bindsym $mod+Ctrl+Mod1+h focus output right
+
+# mdc control
+bindsym $mod+Ctrl+a exec --no-startup-id mpc play
+bindsym $mod+Ctrl+s exec --no-startup-id mpc toggle
+bindsym $mod+Ctrl+q exec --no-startup-id mpc stop
+bindsym $mod+Ctrl+z exec --no-startup-id mpc prev
+bindsym $mod+Ctrl+x exec --no-startup-id mpc next
+bindsym $mod+Ctrl+j exec --no-startup-id mpc volume -5
+bindsym $mod+Ctrl+k exec --no-startup-id mpc volume +5
+
+# Screenshot
+bindsym --release Print exec scrot '%Y%m%d-%H%M%S.png' -e 'mv $f /home/lintmx/Pictures/'
+bindsym --release Shift+Print exec scrot --select '%Y%m%d-%H%M%S.png' -e 'mv $f /home/lintmx/Pictures/'
+
+# Set workspace name
+set $WS1 ""
+set $WS2 ""
+set $WS3 ""
+set $WS4 ""
+set $WS5 ""
+set $WS6 ""
+set $WS7 ""
+set $WS8 ""
+set $WS9 ""
+set $WS0 ""
+set $WSLP ""
+
+workspace $WSLP output eDP1
+workspace $WS0 output VGA1
+
+# Switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
+bindsym $mod+grave workspace $WSLP
+bindsym $mod+Shift+Ctrl+h workspace prev
+bindsym $mod+Shift+Ctrl+l workspace next
+bindsym Mod1+Tab workspace back_and_forth
+
+# Move focused container to wrokspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS0
+bindsym $mod+Shift+grave move container to workspace $WSLP
+bindsym $mod+Shift+n move scratchpad
+bindsym $mod+Shift+m scratchpad show
+
+# Move floating window
+bindsym $mod+Mod1+h move left
+bindsym $mod+Mod1+j move down
+bindsym $mod+Mod1+k move up
+bindsym $mod+Mod1+l move right
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Resize window
+mode "Resize Window" {
+    bindsym h resize shrink width 3 px or 3 ppt
+    bindsym j resize grow height 3 px or 3 ppt
+    bindsym k resize shrink height 3 px or 3 ppt
+    bindsym l resize grow width 3 px or 3 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Window style
+new_window pixel 1
+hide_edge_borders both
+focus_follows_mouse no
+
+# Window float
+for_window [class="^(?i)telegram"] floating enable
+for_window [class="^(?i)chromium" window_role="pop-up" title="^Developer Tools"] floating enable
+for_window [window_type="dialog"] floating enable
+
+# Font
+font pango:Noto Sans 12
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
+bar {
+    status_command conky
+    position top
+    workspace_buttons yes
+    font pango:Noto Sans,FontAwesome 12
+
+    colors {
+        background #222222
+        statusline #FFFFFF
+
+        focused_workspace  #737373 #7c7c7c #FFFFFF
+        active_workspace   #000000 #000000 #FFFFFF
+        inactive_workspace #7c7c7c #2c2c2c #FFFFFF
+        urgent_workspace   #ff7676 #2c2c2c #FFFFFF
+    }
+}
