@@ -2,8 +2,8 @@
 Description=Auto Change Wallpapers.
 
 [Timer]
-OnBootSec=1min
-OnUnitActiveSec=1min
+OnCalendar=minutely
+Persistent=true
 Unit=wallpaper.service
 
 [Install]

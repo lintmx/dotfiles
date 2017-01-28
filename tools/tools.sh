@@ -49,6 +49,10 @@ function ss() {
         test)
             server_config="$2"
             
+            if [ -z "$server_config" ]; then
+                server_config='config'
+            fi
+
             if [ -f /etc/shadowsocks/$server_config.json ]; then
                 test_url=`cat /etc/shadowsocks/${server_config}.json | grep server\": | sed 's/.*\"server\":\"\(.*\)\",/\1/'`
 

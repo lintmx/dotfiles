@@ -70,7 +70,7 @@ else
 fi
 
 if [ ! -z "$hdmi_status" ]; then
-    volume-tools switch hdmi
+    volume-tools switch laptop
 else
     volume-tools switch laptop
 fi
