@@ -26,8 +26,8 @@ exec --no-startup-id numlockx on
 exec --no-startup-id screen-tools auto
 exec --no-startup-id fcitx
 exec --no-startup-id nm-applet
-exec --no-startup-id change_wallpaper
-exec --no-startup-id telegram-desktop
+exec --no-startup-id systemctl --user start wallpaper.timer
+exec --no-startup-id telegram-desktop -startintray
 exec --no-startup-id mpd
 
 # Set Quick Start
@@ -40,11 +40,11 @@ bindsym $mod+d exec --no-startup-id rofi -show run -font "Source Code Pro 12"
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+a mode "Resize Window"
-bindsym $mod+p focus parent
-bindsym $mod+i focus child
+# bindsym $mod+a mode "Resize Window"
+# bindsym $mod+p focus parent
+# bindsym $mod+i focus child
 bindsym $mod+b border toggle
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
 bindsym $mod+BackSpace exec --no-startup-id power-manager
 bindsym $mod+y split h
 bindsym $mod+u split v
@@ -56,16 +56,18 @@ bindsym $mod+Shift+equal exec --no-startup-id screen-tools auto
 bindsym $mod+Shift+minus exec --no-startup-id screen-tools off eDP1
 
 # Meida control
-bindsym XF86AudioRaiseVolume exec volume-tools volume 2%+
-bindsym XF86AudioLowerVolume exec volume-tools volume 2%-
+bindsym XF86AudioRaiseVolume exec volume-tools volume 1%+
+bindsym XF86AudioLowerVolume exec volume-tools volume 1%-
 bindsym XF86AudioMute exec volume-tools volume 0%
 
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 
 # Monitor control
-bindsym $mod+Ctrl+Mod1+l focus output left
-bindsym $mod+Ctrl+Mod1+h focus output right
+bindsym $mod+Mod1+j focus output left
+bindsym $mod+Mod1+k focus output right
+bindsym $mod+Ctrl+Mod1+j move workspace to output left
+bindsym $mod+Ctrl+Mod1+k move workspace to output right
 
 # mdc control
 bindsym $mod+Ctrl+a exec --no-startup-id mpc play
@@ -73,8 +75,8 @@ bindsym $mod+Ctrl+s exec --no-startup-id mpc toggle
 bindsym $mod+Ctrl+q exec --no-startup-id mpc stop
 bindsym $mod+Ctrl+z exec --no-startup-id mpc prev
 bindsym $mod+Ctrl+x exec --no-startup-id mpc next
-bindsym $mod+Ctrl+j exec --no-startup-id mpc volume -5
-bindsym $mod+Ctrl+k exec --no-startup-id mpc volume +5
+bindsym $mod+Ctrl+minus exec --no-startup-id mpc volume -5
+bindsym $mod+Ctrl+equal exec --no-startup-id mpc volume +5
 
 # Screenshot
 bindsym --release Print exec scrot '%Y%m%d-%H%M%S.png' -e 'mv $f /home/lintmx/Pictures/'
@@ -108,8 +110,8 @@ bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
 bindsym $mod+0 workspace $WS0
 bindsym $mod+grave workspace $WSLP
-bindsym $mod+Shift+Ctrl+h workspace prev
-bindsym $mod+Shift+Ctrl+l workspace next
+# bindsym $mod+Shift+Ctrl+h workspace prev
+# bindsym $mod+Shift+Ctrl+l workspace next
 bindsym Mod1+Tab workspace back_and_forth
 
 # Move focused container to wrokspace
@@ -128,10 +130,10 @@ bindsym $mod+Shift+n move scratchpad
 bindsym $mod+Shift+m scratchpad show
 
 # Move floating window
-bindsym $mod+Mod1+h move left
-bindsym $mod+Mod1+j move down
-bindsym $mod+Mod1+k move up
-bindsym $mod+Mod1+l move right
+bindsym $mod+Shift+Ctrl+h move left
+bindsym $mod+Shift+Ctrl+j move down
+bindsym $mod+Shift+Ctrl+k move up
+bindsym $mod+Shift+Ctrl+l move right
 
 # Change focus
 bindsym $mod+h focus left
@@ -154,20 +156,15 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Resize window
-mode "Resize Window" {
-    bindsym h resize shrink width 3 px or 3 ppt
-    bindsym j resize grow height 3 px or 3 ppt
-    bindsym k resize shrink height 3 px or 3 ppt
-    bindsym l resize grow width 3 px or 3 ppt
+bindsym $mod+Ctrl+h resize shrink width 3 px or 3 ppt
+bindsym $mod+Ctrl+j resize grow height 3 px or 3 ppt
+bindsym $mod+Ctrl+k resize shrink height 3 px or 3 ppt
+bindsym $mod+Ctrl+l resize grow width 3 px or 3 ppt
 
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
 
 # Window style
 new_window pixel 1
@@ -183,11 +180,11 @@ for_window [window_type="dialog"] floating enable
 font pango:Noto Sans 12
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.focused          #464646 #464646 #ffffff  #ffffff   #464646
+client.focused_inactive #1d2121 #1d2121 #a1a1a1  #484e50   #1d2121
+client.unfocused        #272727 #272727 #fdfdfd  #bfbfbf   #272727
+client.urgent           #4a4b4c #4a4b4c #fdfdfd  #fbfbfb   #4a4c4b
+client.placeholder      #000000 #0c0c0c #ffffff  #000000   #0c0c0c
 
 client.background       #ffffff
 
@@ -195,7 +192,7 @@ bar {
     status_command conky
     position top
     workspace_buttons yes
-    font pango:Noto Sans,FontAwesome 12
+    font pango:Noto Sans,FontAwesome 10
 
     colors {
         background #222222
