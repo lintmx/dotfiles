@@ -12,10 +12,7 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'xuhdev/SingleCompile'
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'wsdjeg/vim-chat'
 
 call vundle#end()
 filetype plugin indent on
@@ -36,10 +33,13 @@ set cursorline
 set foldmethod=syntax
 set nofoldenable
 set showmatch
-" set mouse=a
+
+" Theme
 syntax on
 syntax enable
-" set background=dark
+set background=dark
+let g:solarized_termtrans = 256
+" set termguicolors
 colorscheme solarized
 
 " Tab settings
@@ -54,8 +54,9 @@ command W w !sudo tee % > /dev/null
 
 " Hot key settings
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
-nmap <F9> :SCCompile<cr>
-nmap <F10> :SCCompileRun<cr>
+nnoremap <F4> :set invpaste paste?<CR>
+set pastetoggle=<F4>
+set showmode
 
 " vim-powerline
 let g:Powerline_colorscheme='solarized256'
@@ -73,7 +74,3 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
-" vim-fswitch
-nmap <silent> <Leader>sw :FSHere<CR>
-
-let g:solarized_termcolors=256

@@ -1,0 +1,13 @@
+[user]
+    email = lintmx@gmail.com
+    name = lintmx
+[core]
+    eol = lf
+    autocrlf = false
+[alias]
+    co = checkout
+    ci = commit
+    br = branch
+    lo = log -n 10 --color --decorate --date=relative --abbrev-commit --pretty=format:'%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)<%cr>%C(reset) %C(bold blue)%an <%ae>%C(reset)'
+[include]
+    path = .gitconfig_machine
