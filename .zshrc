@@ -10,7 +10,6 @@ plugins=(
   encode64
   extract
   systemd
-  zsh-autosuggestions
   zsh_reload
   zsh-syntax-highlighting
 )
@@ -24,6 +23,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export LANG=en_US.UTF-8
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 export EDITOR='vim'
 
 source $HOME/.zsh_machine
@@ -33,20 +34,6 @@ alias svim='sudo -E vim'
 alias la='ls -la'
 alias nohis="unset HISTFILE"
 alias s='screen -R work'
-
-# Import
-if [ -f "$HOME/.acme.sh/acme.sh.env" ]
-then
-  . "$HOME/.acme.sh/acme.sh.env"
-fi
-
-if [ "$(uname -s)" = "Darwin" ]
-then
-  export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-  export GPG_TTY=$(tty)
-  export GOPATH=$HOME/Workspace/Go
-  export PATH=$GOPATH/bin:$PATH
-fi
 
 # Function
 function proxy() {
