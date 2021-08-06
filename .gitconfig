@@ -1,6 +1,6 @@
 [user]
-    email = lintmx@gmail.com
-    name = lintmx
+	email = lintmx@gmail.com
+	name = lintmx
 [core]
     eol = lf
     autocrlf = false

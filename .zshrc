@@ -45,3 +45,8 @@ function noproxy() {
   export http_proxy=""
   export https_proxy=""
 }
+
+function proxy1() {
+    export http_proxy="http://10.11.12.10:1080"
+    export https_proxy="http://10.11.12.10:1080"
+}
