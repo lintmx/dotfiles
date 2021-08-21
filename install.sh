@@ -1,24 +1,27 @@
 #!/bin/bash
 
-OS='linux'
+OS="linux"
 
 __check_os() {
     uname_os=$(uname -s)
     if [ "${uname_os}" == "Darwin" ]; then
-        OS='mac'
+        OS="mac"
     elif [ "${uname_os}" == "Linux" ]; then
-        source /etc/os-release
-        case $ID in
-            ubuntu)
-                OS='ubuntu'
-                ;;
-            arch)
-                OS='arch'
-                ;;
-            *)
-                exit 1
-                ;;
-        esac
+        OS=$( cat /etc/issue )
+
+        if [[ "$OS" == "Ubuntu"* ]]
+        then
+            OS="ubuntu"
+        elif [[ "$OS" == "Debian"* ]]
+        then
+            OS="debian"
+        elif [[ "$OS" == "Arch"* ]]
+        then
+            OS="arch"
+        else
+            echo "Other distribution: ${OS}"
+            exit 1
+        fi
     else
         echo "Other OS: ${uname_os}"
         exit 1
@@ -28,8 +31,13 @@ __check_os() {
 __install_depends() {
     case ${OS} in
         ubuntu)
-            sudo apt-get update
-            sudo apt-get install -y zsh vim curl git
+            sudo apt update
+            sudo apt install -y zsh vim curl git
+            chsh -s $(which zsh)
+            ;;
+        debian)
+            sudo apt update
+            sudo apt install -y zsh vim curl git
             chsh -s $(which zsh)
             ;;
         arch)
