@@ -32,21 +32,21 @@ __install_depends() {
     case ${OS} in
         ubuntu)
             sudo apt update
-            sudo apt install -y zsh vim curl git tmux
+            sudo apt install -y zsh vim curl git tmux xclip
             chsh -s $(which zsh)
             ;;
         debian)
             sudo apt update
-            sudo apt install -y zsh vim curl git tmux
+            sudo apt install -y zsh vim curl git tmux xclip
             chsh -s $(which zsh)
             ;;
         arch)
-            sudo pacman -Syyu --noconfirm zsh vim curl git tmux
+            sudo pacman -Syyu --noconfirm zsh vim curl git tmux xclip
             chsh -s $(which zsh)
             ;;
         mac)
             brew update
-            brew install zsh vim curl git tmux
+            brew install zsh vim curl git tmux reattach-to-user-namespace
             chsh -s $(which zsh)
             ;;
         *)
@@ -57,6 +57,7 @@ __install_depends() {
 
 __configure_vim() {
     ln -sf "$(pwd)/.vimrc" "$HOME/.vimrc"
+    rm -rf ~/.vim
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
     vim +PluginInstall +qall
@@ -64,6 +65,7 @@ __configure_vim() {
 
 __configure_zsh() {
     ln -sf "$(pwd)/.zshrc" "$HOME/.zshrc"
+    rm -rf ~/.oh-my-zsh
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     touch "$HOME/.zsh_machine"
@@ -75,7 +77,10 @@ __configure_git() {
 }
 
 __configure_tmux() {
-    ln -sf "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
+    rm -rf ~/.oh-my-tmux
+    git clone https://github.com/gpakosz/.tmux.git ~/.oh-my-tmux
+    ln -sf "$HOME/.oh-my-tmux/.tmux.conf" "$HOME/.tmux.conf"
+    ln -sf "$HOME/.dotfiles/.tmux.conf.local" "$HOME/.tmux.conf.local"
 }
 
 __check_os
