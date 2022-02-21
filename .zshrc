@@ -10,7 +10,7 @@ plugins=(
   encode64
   extract
   systemd
-  zsh_reload
+#  zsh_reload
   zsh-syntax-highlighting
 )
 
@@ -26,6 +26,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR='vim'
+export PATH="/usr/local/sbin:$PATH"
 
 source $HOME/.zsh_machine
 
@@ -34,11 +35,12 @@ alias svim='sudo -E vim'
 alias la='ls -la'
 alias nohis="unset HISTFILE"
 alias s='screen -R work'
+alias t='tmux'
 
 # Function
 function proxy() {
-  export http_proxy="http://127.0.0.1:8010"
-  export https_proxy="http://127.0.0.1:8010"
+  export http_proxy="http://127.0.0.1:10800"
+  export https_proxy="http://127.0.0.1:10800"
 }
 
 function noproxy() {
@@ -46,7 +48,3 @@ function noproxy() {
   export https_proxy=""
 }
 
-function proxy1() {
-    export http_proxy="http://10.11.12.10:1080"
-    export https_proxy="http://10.11.12.10:1080"
-}

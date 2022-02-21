@@ -32,21 +32,21 @@ __install_depends() {
     case ${OS} in
         ubuntu)
             sudo apt update
-            sudo apt install -y zsh vim curl git
+            sudo apt install -y zsh vim curl git tmux
             chsh -s $(which zsh)
             ;;
         debian)
             sudo apt update
-            sudo apt install -y zsh vim curl git
+            sudo apt install -y zsh vim curl git tmux
             chsh -s $(which zsh)
             ;;
         arch)
-            sudo pacman -Syyu --noconfirm zsh vim curl git
+            sudo pacman -Syyu --noconfirm zsh vim curl git tmux
             chsh -s $(which zsh)
             ;;
         mac)
             brew update
-            brew install zsh vim curl git
+            brew install zsh vim curl git tmux
             chsh -s $(which zsh)
             ;;
         *)
@@ -74,11 +74,16 @@ __configure_git() {
     touch "$HOME/.gitconfig_machine"
 }
 
+__configure_tmux() {
+    ln -sf "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
+}
+
 __check_os
 __install_depends
 __configure_vim
 __configure_zsh
 __configure_git
+__configure_tmux
 
 echo 'Done.'
 zsh
