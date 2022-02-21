@@ -35,7 +35,7 @@ alias svim='sudo -E vim'
 alias la='ls -la'
 alias nohis="unset HISTFILE"
 alias s='screen -R work'
-alias t='tmux'
+alias t='tmux new -As work'
 
 # Function
 function proxy() {
