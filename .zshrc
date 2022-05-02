@@ -36,11 +36,12 @@ alias la='ls -la'
 alias nohis="unset HISTFILE"
 alias s='screen -R work'
 alias t='tmux new -As work'
+alias filechown='find . -exec sh -c "if [[ -d "{}" ]]; then chmod 755 "{}"; else chmod 644 "{}"; fi " \;'
 
 # Function
 function proxy() {
-  export http_proxy="http://127.0.0.1:10800"
-  export https_proxy="http://127.0.0.1:10800"
+  export http_proxy="http://127.0.0.1:7890"
+  export https_proxy="http://127.0.0.1:7890"
 }
 
 function noproxy() {
