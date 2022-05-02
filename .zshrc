@@ -23,9 +23,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export LANG=en_US.UTF-8
-export LC_CTYPE="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export EDITOR='vim'
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR=vim
 export PATH="/usr/local/sbin:$PATH"
 
 source $HOME/.zsh_machine

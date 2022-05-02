@@ -47,7 +47,7 @@ set tabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
-set list listchars=tab:»·,trail:·
+" set list listchars=tab:»·,trail:·
 
 " sudo save
 command W w !sudo tee % > /dev/null
