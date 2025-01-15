@@ -19,8 +19,8 @@ __check_os() {
         then
             OS="arch"
         else
-            echo "Other distribution: ${OS}"
-            exit 1
+            echo "Automatic identification of distribution failed, please enter a distribution. (ubuntu, debian, arch, mac)"
+            read OS
         fi
     else
         echo "Other OS: ${uname_os}"
@@ -50,6 +50,7 @@ __install_depends() {
             chsh -s $(which zsh)
             ;;
         *)
+            echo "Unsupported distribution."
             exit 1
             ;;
     esac
@@ -59,7 +60,6 @@ __configure_vim() {
     ln -sf "$(pwd)/.vimrc" "$HOME/.vimrc"
     rm -rf ~/.vim
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
     vim +PluginInstall +qall
 }
 

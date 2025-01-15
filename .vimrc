@@ -12,7 +12,7 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'rakr/vim-one'
 
 call vundle#end()
 filetype plugin indent on
@@ -37,10 +37,10 @@ set showmatch
 " Theme
 syntax on
 syntax enable
-set background=dark
+" set background=light
 let g:solarized_termtrans = 256
-" set termguicolors
-colorscheme solarized
+set termguicolors
+colorscheme one
 
 " Tab settings
 set tabstop=4
@@ -59,7 +59,7 @@ set pastetoggle=<F4>
 set showmode
 
 " vim-powerline
-let g:Powerline_colorscheme='solarized256'
+" let g:Powerline_colorscheme="one"
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup=1
