@@ -3,6 +3,10 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="ys"
 
 plugins=(
+  z
+  copypath
+  command-not-found
+  safe-paste
   git
   sudo
   man
@@ -12,6 +16,7 @@ plugins=(
   systemd
 #  zsh_reload
   zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
