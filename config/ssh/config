@@ -1,0 +1,8 @@
+# 共享 SSH 主配置入口。
+# 具体 Host 分组由当前机器自行放在 ~/.ssh/conf.d/*.conf 中维护。
+
+Include ~/.ssh/config.local
+Include ~/.ssh/conf.d/*.conf
+
+Host *
+    ServerAliveInterval 30

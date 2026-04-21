@@ -1,0 +1,39 @@
+# 本文件只覆盖 oh-my-tmux 的少量默认项。
+# 目标是保持配置精简、稳定，并降低后续维护成本。
+
+
+# -- 窗口与面板 ---------------------------------------------------------------
+
+# 新建窗口从默认路径启动，避免无意继承上一个项目目录。
+tmux_conf_new_window_retain_current_path=false
+
+# 新建 pane 保留当前路径，便于在同一项目内继续拆分工作区。
+tmux_conf_new_pane_retain_current_path=true
+
+# 不自动尝试重连 SSH，会话行为更可预期。
+tmux_conf_new_pane_reconnect_ssh=false
+
+# 新建会话时不额外提示输入名称，保持默认的快速创建流程。
+tmux_conf_new_session_prompt=false
+
+
+# -- 显示与状态栏 -------------------------------------------------------------
+
+# 现代终端优先自动启用 24 位色；若终端兼容性异常，可改回 false。
+tmux_conf_24b_colour=auto
+
+# 状态栏只保留核心信息：会话名、时间、日期、主机名。
+tmux_conf_theme_status_left=" #S "
+tmux_conf_theme_status_right="%Y-%m-%d %R | #{hostname} "
+
+
+# -- 剪贴板 -------------------------------------------------------------------
+
+# 复制时同步写入系统剪贴板。
+tmux_conf_copy_to_os_clipboard=true
+
+
+# -- 用户自定义覆盖 -----------------------------------------------------------
+
+# 适度增大历史缓冲，便于回溯较长输出。
+set -g history-limit 20000
