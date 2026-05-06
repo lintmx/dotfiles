@@ -20,7 +20,6 @@ set showcmd
 set nowrap
 set nobackup
 set nowritebackup
-set undofile
 set incsearch
 set hlsearch
 set ignorecase
@@ -39,8 +38,10 @@ set splitbelow
 set splitright
 set scrolloff=5
 set sidescrolloff=5
-set mouse=a
+" set mouse=a
 set updatetime=300
+set undofile
+set undodir=~/.vim/undo//
 
 " 主题设置
 syntax on

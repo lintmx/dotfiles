@@ -50,6 +50,8 @@ done
 export PATH
 
 # 从 functions.zsh 加载自定义函数（如果存在）。
+_dotfiles_zsh_dir="${${(%):-%x}:A:h}"
 if [ -r "$_dotfiles_zsh_dir/functions.zsh" ]; then
   source "$_dotfiles_zsh_dir/functions.zsh"
 fi
+unset _dotfiles_zsh_dir
