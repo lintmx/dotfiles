@@ -36,6 +36,24 @@ install_zsh() {
   ensure_zsh_entry "$HOME/.zshrc" "$shared_file" || return 1
 }
 
+install_docker_pull() {
+  case "$OS_FAMILY" in
+    ubuntu|debian)
+      sudo apt update && sudo apt install -y skopeo jq
+      ;;
+    arch)
+      sudo pacman -S --needed skopeo jq
+      ;;
+    mac)
+      if ! command -v brew >/dev/null 2>&1; then
+        fail "在 macOS 上安装 Docker 拉取模块需要先安装 Homebrew。"
+        return 1
+      fi
+      brew install skopeo jq
+      ;;
+  esac
+}
+
 install_vim_plug() {
   local autoload_dir="$HOME/.vim/autoload"
   local plug_vim="$autoload_dir/plug.vim"
@@ -135,6 +153,7 @@ run_all_modules() {
   local -a modules=(
     "基础环境:install_base"
     "zsh:install_zsh"
+    "Docker 拉取（Skopeo）:install_docker_pull"
     "vim:install_vim"
     "git:install_git_module"
     "ssh:install_ssh_module"
